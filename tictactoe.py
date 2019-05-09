@@ -53,16 +53,56 @@ def printBoard():
 
 def game():
 	mode = var[0]
-	player1 = var[1]
+	if var[1] == 'x':
+		opponent1 = 'x'
+		opponent2 = 'o'
+	else:
+		opponent1 = 'o'
+		opponent2 = 'x'
+	print(mode)
 	if mode == 1: # ask player 1 for the moves and have computer respond with other char
+		move1 = raw_input("Indicate the index you would like to place your " + opponent1)
+		validate(move1)
+		board[move1] = opponent1
+		# COMPUTER MOVE
 	if mode == 2: # ask player 1 and then ask player 2 VALIDATE
+		valid = 1
+		while valid == 1:
+			move1 = raw_input("Indicate the index you would like to place your " + opponent1)
+			if validate(move1):
+				board[move1] = opponent1
+				valid = 0
+			else:
+				print("Invalid input")
+		valid = 1
+		while valid == 1:
+			move2 = raw_input("Indicate the index you would like to place your " + opponent2)
+			if validate(move2):
+				board[move2] = opponent2
+				valid = 0
+			else:
+				print("Invalid input")
 	if mode == 3: # human watches comp play itself
+		# COMPUTER MOVE X2
+		compAlgorithm()
 
+def compAlgorithm():
+	move = 1
+	while (move):
+		#check to try and get 3 in a row...
+		move = 0
+
+def validate(move):
+	if move >= 0 and move <= 8:
+		if board[move] == '':
+			return True
+	return False
 
 # MAIN
 board = ['','','','','','','','',''] # board in list form 0-8
 
 var = ['0','0']
 intro()
+game()
 mode()
 user1()
