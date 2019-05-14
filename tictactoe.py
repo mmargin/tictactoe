@@ -68,6 +68,68 @@ def boardFull():
 			return False
 	return True
 
+# def check2InARow():
+
+def checkWin(index, xo):
+	if index == 0:
+		if board[3] == xo and board[6] == xo: #vertical
+			return True
+		if board[1] == xo and board[2] == xo: #horizontal
+			return True
+		if board[4] == xo and board[8] == xo: #diagonal
+			return True
+	if index == 1:
+		if board[4] == xo and board[7] == xo: #vertical
+			return True
+		if board[0] == xo and board[2] == xo: #horizontal
+			return True
+	if index == 2:
+		if board[5] == xo and board[8] == xo: #vertical
+			return True
+		if board[0] == xo and board[1] == xo: #horizontal
+			return True
+		if board[4] == xo and board[6] == xo: #diagonal
+			return True
+	if index == 3:
+		if board[0] == xo and board[6] == xo: #vertical
+			return True
+		if board[4] == xo and board[5] == xo: #horizontal
+			return True
+	if index == 4:
+		if board[1] == xo and board[7] == xo: #vertical
+			return True
+		if board[3] == xo and board[5] == xo: #horizontal
+			return True
+		if board[0] == xo and board[8] == xo: #diagonal1
+			return True
+		if board[2] == xo and board[6] == xo: #diagonal2
+			return True
+	if index == 5:
+		if board[2] == xo and board[8] == xo: #vertical
+			return True
+		if board[4] == xo and board[3] == xo: #horizontal
+			return True
+	if index == 6:
+		if board[4] == xo and board[0] == xo: #vertical
+			return True
+		if board[7] == xo and board[8] == xo: #horizontal
+			return True
+		if board[4] == xo and board[2] == xo: #diagonal
+			return True
+	if index == 7:
+		if board[4] == xo and board[1] == xo: #vertical
+			return True
+		if board[6] == xo and board[8] == xo: #horizontal
+			return True
+	if index == 8:
+		if board[5] == xo and board[2] == xo: #vertical
+			return True
+		if board[6] == xo and board[7] == xo: #horizontal
+			return True
+		if board[4] == xo and board[0] == xo: #diagonal
+			return True
+	return False
+
 def game():
 	mode = var[0]
 	if var[1] == 'x':
@@ -78,42 +140,61 @@ def game():
 		opponent2 = 'x'
 	print(mode)
 	if mode == '1': # ask player 1 for the moves and have computer respond with other char
-		move1 = raw_input("Indicate the index you would like to place your " + opponent1 + " ")
-		validate(int(move1))
-		board[int(move1)] = opponent1
-		# COMPUTER MOVE
+		mode1()
 	if mode == '2': # ask player 1 and then ask player 2 VALIDATE
 		full = boardFull()
-		while (full == False):
-			valid = 0
-			while valid == 0:
-				move1 = raw_input("Indicate the index you would like to place your " + opponent1 + " ")
-				if validate(int(move1)):
-					board[int(move1)] = opponent1
-					valid = 1
-				else:
-					print("Invalid input")
-			printBoard()
-			full = boardFull()
-			if full:
-				break
-			valid = 0
-			while valid == 0:
-				move2 = raw_input("Indicate the index you would like to place your " + opponent2 + " ")
-				if validate(int(move2)):
-					board[int(move2)] = opponent2
-					valid = 1
-				else:
-					print("Invalid input")
-			printBoard()
+		while not full and var[3] == '-1':
+			mode2(opponent1)
+			if var[3] == '-1':
+				mode2(opponent2)
+		print(var[2])
 	if mode == '3': # human watches comp play itself
 		# COMPUTER MOVE X2
 		compAlgorithm()
-	print("Game is done! Thank you for playing!")
-# MAIN
-board = [' ',' ',' ',' ',' ',' ',' ',' ',' '] # board in list form 0-8
+	print("Game is done!")
+	print("Thank you for playing!")
 
-var = ['0','0']
+def mode1():
+	move1 = raw_input("Indicate the index you would like to place your " + opponent1 + " ")
+	validate(int(move1))
+	board[int(move1)] = opponent1
+	# COMPUTER MOVE
+
+def mode2(opponent):
+	valid = 0
+	while not valid:
+		move = raw_input("Indicate the index you would like to place your " + opponent + " ")
+		if validate(int(move)):
+			board[int(move)] = opponent
+			valid = 1
+			if checkWin(int(move), opponent):
+				if opponent == var[1]:
+					var[2] = "Person1 won!"
+					var[3] = 1
+				else:
+					var[2] = "Person2 won!"
+					var[3] = 2
+				printBoard()
+				return
+		else:
+			print("Invalid input")
+		printBoard()
+		full = boardFull()
+		if full:
+			var[3] = 0
+			break
+# MAIN
+board = [' ',' ',' ',
+		' ',' ',' ',
+		' ',' ',' '] # board in list form 0-8
+
+# corners: 0, 2, 6, 8
+# center: 4
+
+
+
+#scores[0,0]
+var = ['0','0','It is a tie!', '-1']
 intro()
 game()
 # mode()
