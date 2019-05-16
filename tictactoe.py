@@ -191,8 +191,6 @@ board = [' ',' ',' ',
 # corners: 0, 2, 6, 8
 # center: 4
 
-
-
 #scores[0,0]
 var = ['0','0','It is a tie!', '-1']
 intro()
