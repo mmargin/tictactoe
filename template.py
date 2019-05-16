@@ -11,7 +11,7 @@ print(int(args.mode))
 #print(sys.argv)
 #print(len(sys.argv))
 
-#print("caca")
+#print("you have to annoyingly comment out if you do not need it anymore; and no timestamp")
 logging.basicConfig(format = '%(asctime)s.%(msecs)03d %(levelname)-7s %(message)s', datefmt = '%Y%m%d %H:%M:%S', level = logging.DEBUG if args.verbose else logging.INFO)
 logging.info("info")
 logging.warning("warn")
