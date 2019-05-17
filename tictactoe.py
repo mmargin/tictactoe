@@ -1,3 +1,14 @@
+import argparse
+import logging
+
+parser = argparse.ArgumentParser(description = 'Tic Tac Toe Game Intro by Maria Marginean')
+parser.add_argument('-v', '--verbose', action = 'store_true', help = 'Verbose', required = False)
+parser.add_argument('-m', '--mode', help = 'The mode 1-3', required = True)
+
+args = parser.parse_args()
+print(args.verbose)
+print("Mode selected = " + int(args.mode))
+var[1] = args.mode
 
 def intro():
 	print("***** Tic Tac Toe Game *****")
