@@ -3,12 +3,11 @@ import logging
 
 parser = argparse.ArgumentParser(description = 'Tic Tac Toe Game Intro by Maria Marginean')
 parser.add_argument('-v', '--verbose', action = 'store_true', help = 'Verbose', required = False)
-parser.add_argument('-m', '--mode', help = 'The mode 1-3', required = True)
+parser.add_argument('-m', '--mode', help = 'The game mode 1-3', required = True)
 
 args = parser.parse_args()
 print(args.verbose)
-print("Mode selected = " + int(args.mode))
-var[1] = args.mode
+print("Mode selected = " + args.mode)
 
 def intro():
 	print("***** Tic Tac Toe Game *****")
@@ -19,7 +18,7 @@ def intro():
 
 	start = 1
 	while start == 1:
-		var[0] = raw_input("Select a mode by indicating one number 1-3 ")
+		# var[0] = raw_input("Select a mode by indicating one number 1-3 ")
 		if var[0] == '1':
 			var[1] = raw_input("Would you, the Person, like to be 'x' or 'o'? " )
 			xo = var[1]
@@ -46,7 +45,7 @@ def intro():
 			print("Computer1 will be 'x' and Computer2 will be 'o' ")
 			start = 0
 		else:
-			print("Invalid input")	
+			print("Invalid input")
 	raw_input("Press ENTER to continue ")
 
 def mode():
@@ -204,7 +203,9 @@ board = [' ',' ',' ',
 
 #scores[0,0]
 var = ['0','0','It is a tie!', '-1']
-intro()
+var[0] = args.mode
+var[1] = 'x'
+# intro()
 game()
 # mode()
 # user1()
